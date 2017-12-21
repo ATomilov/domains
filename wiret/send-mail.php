@@ -1,0 +1,21 @@
+<?php
+require_once('../../../../wp-load.php');
+$admin_email = get_option('admin_email');
+$name = $_POST['name'];
+$email = $_POST['email'];
+$address = $_POST['address'];
+$to = $admin_email;
+$from = 'YorkBit.com';
+$subject = 'Request from YorkBit';
+$headers = "From: " . strip_tags($from) . "\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+$message = '<html><body>';
+$message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+$message .= "<tr><td style='background: #eee;'><strong>Name</strong> </td><td>" . strip_tags($name) . "</td></tr>";
+$message .= "<tr><td style='background: #eee;'><strong>Email</strong> </td><td>" . strip_tags($email) . "</td></tr>";
+$message .= "<tr><td style='background: #eee;'><strong>Wallet Receiving Address</strong> </td><td>" . strip_tags($address) . "</td></tr>";
+$message .= "</table>";
+$message .= "</body></html>";
+$resault = mail($to, $subject, $message, $headers);
+echo $resault;
